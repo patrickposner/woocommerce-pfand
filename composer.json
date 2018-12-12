@@ -1,0 +1,21 @@
+{
+    "name": "patrickposner/woocommerce-pfand",
+    "description": "woocommerce pfand plugin",
+    "type": "wordpress-plugin",
+    "require": {
+    },
+    "license": "gpl",
+    "authors": [
+      {
+        "name": "Patrick Posner",
+        "email": "hello@patrickposner.de"
+      }
+    ],
+    "autoload": {
+      "classmap": [],
+      "files": [
+        "src/class-woop-admin.php",
+        "src/class-woop-public.php"
+      ]
+    }
+  }
