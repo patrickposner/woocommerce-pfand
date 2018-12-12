@@ -77,7 +77,7 @@ class WOOP_Admin {
 	 */
 	public function add_flaschen_menge_field( $loop, $variation_data, $variation ) {
 
-		echo '<div>';
+		echo '<div class="pfand">';
 		woocommerce_wp_text_input(
 			array(
 				'id'    => 'flaschen_menge[' . $loop . ']',
