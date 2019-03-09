@@ -25,8 +25,6 @@ Pfand for WooCommerce
 1. Choose `woocommerce-pfand` from your downloads folder
 1. Click `Install Now`
 1. All done, now just activate the plugin
-1. Go to CWv3 menu and configure
-1. Save, and you're all good.
 
 == Changelog ==
 
