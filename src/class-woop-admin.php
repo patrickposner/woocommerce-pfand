@@ -49,6 +49,29 @@ class WOOP_Admin {
 				),
 			)
 		);
+
+		woocommerce_wp_select(
+			array(
+				'id'      => '_select_quantity_or_metafield_field',
+				'label'   => __( 'Calculation-Type', 'woocommerce-pfand' ),
+				'options' => array(
+					'quantity'  => __( 'Quantity', 'woocommerce-pfand' ),
+					'metafield' => __( 'Metafield', 'woocommerce-pfand' ),
+				),
+			)
+		);
+
+		woocommerce_wp_select(
+			array(
+				'id'      => '_select_tax_field',
+				'label'   => __( 'Apply Tax', 'woocommerce-pfand' ),
+				'options' => array(
+					'no'  => __( 'No', 'woocommerce-pfand' ),
+					'yes' => __( 'Yes', 'woocommerce-pfand' ),
+				),
+			)
+		);
+
 		echo '</div>';
 	}
 
@@ -60,10 +83,18 @@ class WOOP_Admin {
 	 */
 	public function save_pfand_field( $post_id ) {
 
-		$woocommerce_pfand_field = $_POST['_pfand_field'];
+		$woocommerce_pfand_field      = $_POST['_pfand_field'];
+		$woocommerce_pfand_type_field = $_POST['_select_quantity_or_metafield_field'];
+		$woocommerce_pfand_tax_field  = $_POST['_select_tax_field'];
 
 		if ( ! empty( $woocommerce_pfand_field ) ) {
 			update_post_meta( $post_id, '_pfand_field', esc_attr( $woocommerce_pfand_field ) );
+		}
+		if ( ! empty( $woocommerce_pfand_type_field ) ) {
+			update_post_meta( $post_id, '_select_quantity_or_metafield_field', esc_attr( $woocommerce_pfand_type_field ) );
+		}
+		if ( ! empty( $woocommerce_pfand_tax_field ) ) {
+			update_post_meta( $post_id, '_select_tax_field', esc_attr( $woocommerce_pfand_tax_field ) );
 		}
 
 	}
@@ -78,6 +109,7 @@ class WOOP_Admin {
 	public function add_flaschen_menge_field( $loop, $variation_data, $variation ) {
 
 		echo '<div class="pfand">';
+
 		woocommerce_wp_text_input(
 			array(
 				'id'    => 'flaschen_menge[' . $loop . ']',
@@ -87,6 +119,7 @@ class WOOP_Admin {
 				'value' => get_post_meta( $variation->ID, 'flaschen_menge', true ),
 			)
 		);
+
 		echo '</div>';
 	}
 
@@ -115,8 +148,9 @@ class WOOP_Admin {
 	 * @return void
 	 */
 	public function add_flaschen_menge_to_variation_data( $variations ) {
-
-		$variations['flaschen_menge'] = '<div class="woocommerce_custom_field">Anzahl Flaschen: <span>' . get_post_meta( $variations['variation_id'], 'flaschen_menge', true ) . '</span></div>';
+		if ( isset( $variations['flaschen_menge'] ) && ! empty( $variations['flaschen_menge'] ) ) {
+			$variations['flaschen_menge'] = '<div class="woocommerce_custom_field">Anzahl Flaschen: <span>' . get_post_meta( $variations['variation_id'], 'flaschen_menge', true ) . '</span></div>';
+		}
 		return $variations;
 	}
 	/**
