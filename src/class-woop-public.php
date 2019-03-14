@@ -105,7 +105,7 @@ class WOOP_Public {
 		if ( isset( $pfand ) && ! empty( $pfand ) ) {
 			$item_data[] = array(
 				'key'     => __( 'Pfand', 'wocommerce-pfand' ),
-				'value'   => wc_clean( $pfand . ' €' ),
+				'value'   => wc_price( $pfand ),
 				'display' => '',
 			);
 		}
