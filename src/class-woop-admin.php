@@ -45,7 +45,6 @@ class WOOP_Admin {
 				'type'              => 'number',
 				'custom_attributes' => array(
 					'step' => 'any',
-					'min'  => '0',
 				),
 			)
 		);
@@ -89,6 +88,8 @@ class WOOP_Admin {
 
 		if ( ! empty( $woocommerce_pfand_field ) ) {
 			update_post_meta( $post_id, '_pfand_field', esc_attr( $woocommerce_pfand_field ) );
+		} else {
+			delete_post_meta( $post_id, '_pfand_field' );
 		}
 		if ( ! empty( $woocommerce_pfand_type_field ) ) {
 			update_post_meta( $post_id, '_select_quantity_or_metafield_field', esc_attr( $woocommerce_pfand_type_field ) );
